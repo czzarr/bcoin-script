@@ -1,0 +1,13 @@
+node_modules
+node_modules/*
+*.swp
+*.swo
+npm-debug.log
+dump
+TODO.md
+.DS_Store
+DEPLOYMENT.md
+out
+bitcoin.json
+*db
+blockchain
