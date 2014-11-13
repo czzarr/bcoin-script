@@ -7,6 +7,8 @@ var script = module.exports
 
 script.decode = function decode(s) {
     if (!s) return [];
+    if (Buffer.isBuffer(s))
+      s = utils.toArray(s)
     var opcodes = [];
     for (var i = 0; i < s.length;) {
         var b = s[i++];
@@ -26,7 +28,7 @@ script.decode = function decode(s) {
 
         // Raw number
         if (b >= 0x51 && b <= 0x60) {
-            opcodes.push([b - 0x50]);
+            opcodes.push(b - 0x50);
             continue;
         }
 
@@ -54,6 +56,8 @@ script.decode = function decode(s) {
 
 script.encode = function encode(s) {
     if (!s) return [];
+    if (Buffer.isBuffer(s))
+      s = utils.toArray(s)
     var opcodes = constants.opcodes;
     var res = [];
     for (var i = 0; i < s.length; i++) {
@@ -63,8 +67,6 @@ script.encode = function encode(s) {
         if (Array.isArray(instr)) {
             if (instr.length === 0) {
                 res.push(0);
-            } else if (instr.length === 1 && 0 < instr[0] && instr[0] <= 16) {
-                res.push(0x50 + instr[0]);
             } else if (1 <= instr.length && instr.length <= 0x4b) {
                 res = res.concat(instr.length, instr);
             } else if (instr.length <= 0xff) {

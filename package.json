@@ -1,6 +1,6 @@
 {
   "name": "bcoin-script",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Bitcoin Script encoder, decoder and runner",
   "main": "index.js",
   "scripts": {
